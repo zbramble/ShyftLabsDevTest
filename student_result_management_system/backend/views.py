@@ -11,6 +11,9 @@ from .models import Score
 import json
 from django.core import serializers
 from django.http import JsonResponse
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -24,9 +27,23 @@ class CourseView(viewsets.ModelViewSet):
 
 class ResultView(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated, IsAdminUser]
-    model = Result
+    # model = Result
     serializer_class = ResultSerializer
     queryset = Result.objects.all()
+
+    # name = request.data.get('name')
+
+    # def list(self, request):
+    #     queryset = Result.objects.all()
+    #     serializer = ResultSerializer(queryset, many=True)
+    #     return Response(serializer.data)
+
+    # def retrieve(self, request, pk=None):
+    #     pk = request.data.get('student_id')
+    #     queryset = Result.objects.all()
+    #     result = get_object_or_404(queryset, pk=pk)
+    #     serializer = ResultSerializer(result)
+    #     return Response(serializer.data)
 
     # def post(self,request,*args, **kwargs):
     #     body = json.loads(request.body.decode("utf-8"))

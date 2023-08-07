@@ -20,19 +20,10 @@ class ScoreSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 class ResultSerializer(serializers.ModelSerializer):
-    student_name = serializers.SerializerMethodField()
-    course_name = serializers.SerializerMethodField()
-    score = serializers.SerializerMethodField()
+    student = StudentSerializer(read_only=True)
+    course = CourseSerializer(read_only=True)
+    score = ScoreSerializer(read_only=True)
 
     class Meta:
         model = Result
-        fields = ('id', 'student_name', 'course_name', 'score')
-    
-    def get_student_name(self, obj):
-        return f"{obj.student.first_name} {obj.student.family_name}"
-    
-    def get_course_name(self, obj):
-        return f"{obj.course.name}"
-    
-    def get_score(self, obj):
-        return f"{obj.score.name}"
+        fields = ('id', 'student', 'course', 'score')

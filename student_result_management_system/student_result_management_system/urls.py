@@ -23,6 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'students', views.StudentView, 'student')
 router.register(r'courses', views.CourseView, 'course')
 router.register(r'results', views.ResultView, 'result')
+# router.register(r'result/student/(?P<student_id>\d+)/course/(?P<course_id>\d+)', views.ResultView, 'result')
 router.register(r'scores', views.ScoreView, 'score')
 
 urlpatterns = [
